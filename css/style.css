@@ -1,0 +1,381 @@
+/* ═══════════════════════════════════════════════
+   SIMPLICICAR DISPLAY — style.css
+   Couleurs : blanc + rose #E8005A (charte Simplicicar)
+═══════════════════════════════════════════════ */
+
+:root {
+  --pink:        #E8005A;
+  --pink-light:  #FF2272;
+  --pink-glow:   rgba(232, 0, 90, 0.25);
+  --white:       #FFFFFF;
+  --off-white:   #F7F7F7;
+  --light-gray:  #EBEBEB;
+  --mid-gray:    #AAAAAA;
+  --dark-gray:   #444444;
+  --dark:        #1A1A1A;
+  --darker:      #0E0E0E;
+  --green:       #00C94C;
+
+  --duration-slide: 8000ms; /* durée par voiture en ms */
+}
+
+/* ── RESET ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: var(--white); font-family: 'Open Sans', sans-serif; }
+
+/* ══════════════ HEADER ══════════════ */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 70px;
+  background: var(--white);
+  border-bottom: 3px solid var(--pink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 2px 20px rgba(232, 0, 90, 0.12);
+}
+
+.logo-wrap { display: flex; align-items: center; gap: 14px; }
+
+.logo-circle {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 2px solid var(--pink);
+  background: var(--darker);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 14px var(--pink-glow);
+}
+
+.logo-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 30px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--dark);
+}
+.logo-text span { color: var(--pink); }
+
+.header-center {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid-gray);
+}
+
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+  animation: blink 1.4s infinite;
+}
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+
+.header-right { display: flex; align-items: center; gap: 24px; }
+
+.clock {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 26px; font-weight: 500;
+  letter-spacing: 4px; color: var(--dark-gray);
+}
+
+.veh-count {
+  background: var(--pink); color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 16px;
+}
+
+/* ══════════════ PROGRESS BAR ══════════════ */
+.progress-track {
+  position: fixed; top: 70px; left: 0; right: 0; z-index: 200;
+  height: 4px; background: var(--light-gray);
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--pink-light));
+  width: 0%;
+  box-shadow: 0 0 8px var(--pink-glow);
+}
+
+/* ══════════════ STAGE ══════════════ */
+.stage {
+  position: fixed;
+  top: 74px; left: 0; right: 0; bottom: 88px;
+}
+
+/* ══════════════ SLIDE ══════════════ */
+.slide {
+  position: absolute; inset: 0;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.slide.active { opacity: 1; }
+
+/* ── Photo (gauche) ── */
+.slide-photo {
+  flex: 0 0 55%;
+  position: relative; overflow: hidden;
+  background: var(--darker);
+}
+
+.slide-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+  transition: transform 9s ease;
+}
+.slide.active .slide-photo img { transform: scale(1); }
+
+.slash-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(105deg,
+    transparent 55%,
+    rgba(232, 0, 90, 0.07) 72%,
+    rgba(232, 0, 90, 0.16) 100%
+  );
+  pointer-events: none;
+}
+
+/* Dégradé de fondu vers le panneau info */
+.slide-photo::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; width: 100px;
+  background: linear-gradient(90deg, transparent, var(--white));
+  pointer-events: none;
+}
+
+/* Badge prix */
+.photo-price {
+  position: absolute; bottom: 0; left: 0;
+  background: var(--pink);
+  padding: 14px 44px 14px 24px;
+  clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 100%, 0 100%);
+}
+.photo-price-label {
+  font-size: 10px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 2px;
+}
+.photo-price-amount {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 48px; font-weight: 700;
+  color: var(--white); line-height: 1;
+}
+
+/* Badge km */
+.photo-km {
+  position: absolute; top: 20px; left: 20px;
+  background: rgba(14, 14, 14, 0.82);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(232, 0, 90, 0.5);
+  padding: 7px 14px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--white);
+  font-size: 13px; font-weight: 600; letter-spacing: 1px;
+}
+
+/* Badge année */
+.photo-year {
+  position: absolute; top: 20px; right: 115px;
+  background: var(--pink); color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 2px;
+  padding: 6px 16px;
+}
+
+/* ── Info (droite) ── */
+.slide-info {
+  flex: 1;
+  background: var(--white);
+  padding: 24px 38px 20px 42px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.car-brand {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 60px; font-weight: 700;
+  line-height: 0.9; letter-spacing: -1px;
+  text-transform: uppercase; color: var(--dark);
+}
+.car-model {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 30px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--pink);
+}
+.car-version {
+  font-size: 12px; color: var(--mid-gray);
+  font-weight: 400; letter-spacing: 0.5px;
+  margin-top: 6px; line-height: 1.5;
+}
+
+/* Séparateur */
+.divider {
+  height: 2px;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--light-gray) 55%, transparent 100%);
+  margin: 12px 0;
+}
+
+/* Grille specs */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.spec {
+  background: var(--off-white);
+  padding: 11px 14px;
+  border-bottom: 3px solid transparent;
+}
+.spec.hi { border-bottom-color: var(--pink); }
+
+.spec-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--mid-gray); margin-bottom: 4px;
+}
+.spec-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 19px; font-weight: 700;
+  color: var(--dark); letter-spacing: 0.5px;
+}
+.spec-val.pink { color: var(--pink); }
+
+/* DPE */
+.dpe-badge {
+  display: inline-flex; align-items: center;
+  background: var(--dark); color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 17px; font-weight: 700;
+  padding: 3px 10px 3px 3px; gap: 7px;
+}
+.dpe-letter {
+  background: var(--pink);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700;
+}
+
+/* Équipements */
+.features-block { flex: 1; overflow: hidden; margin-top: 2px; }
+.features-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--mid-gray); margin-bottom: 9px;
+}
+.features-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.feat {
+  border: 1px solid var(--light-gray);
+  padding: 4px 10px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--dark-gray); background: var(--white);
+}
+.feat.hi {
+  border-color: var(--pink);
+  color: var(--pink);
+  background: rgba(232, 0, 90, 0.04);
+}
+
+/* Pied de slide */
+.slide-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--light-gray);
+  margin-top: 8px;
+}
+.ref-tag { font-size: 11px; color: #CCC; letter-spacing: 2px; text-transform: uppercase; }
+
+.guarantee-tag {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 600; letter-spacing: 1px;
+  color: var(--dark-gray);
+}
+
+.dispo-tag {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--green);
+}
+.dispo-tag::before {
+  content: '';
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+}
+
+/* ══════════════ BARRE MINIATURES ══════════════ */
+.thumb-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  height: 88px;
+  background: var(--darker);
+  border-top: 3px solid var(--pink);
+  display: flex; align-items: center;
+  padding: 0 20px; gap: 10px;
+  overflow-x: auto; scrollbar-width: none;
+}
+.thumb-bar::-webkit-scrollbar { display: none; }
+
+.thumb {
+  flex: 0 0 110px; height: 64px;
+  position: relative; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s, opacity 0.3s;
+  opacity: 0.38;
+}
+.thumb.active { border-color: var(--pink); opacity: 1; }
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-name {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0, 0, 0, 0.75);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  text-align: center; padding: 3px 6px;
+  color: var(--white);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.slide-counter {
+  margin-left: auto; flex-shrink: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 42px; font-weight: 700;
+  letter-spacing: -1px; color: #333;
+  white-space: nowrap;
+}
+.slide-counter em { color: var(--pink); font-style: normal; }
+
+/* ══════════════ ANIMATIONS ══════════════ */
+.slide.active .car-brand,
+.slide.active .car-model,
+.slide.active .car-version,
+.slide.active .divider,
+.slide.active .specs-grid,
+.slide.active .features-block,
+.slide.active .photo-price { animation: fadeUp 0.55s ease both; }
+
+.slide.active .car-model      { animation-delay: 0.08s; }
+.slide.active .car-version    { animation-delay: 0.13s; }
+.slide.active .divider        { animation-delay: 0.18s; }
+.slide.active .specs-grid     { animation-delay: 0.23s; }
+.slide.active .features-block { animation-delay: 0.32s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Effet scan TV */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0, 0, 0, 0.02) 3px, rgba(0, 0, 0, 0.02) 4px
+  );
+  pointer-events: none;
+}

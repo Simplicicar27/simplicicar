@@ -1,0 +1,411 @@
+/* ═══════════════════════════════════════════════
+   SIMPLICICAR DISPLAY — style.css
+   Thème : Sombre premium (charte fiche PDF Simplicicar)
+   Fond noir + rose vif + or/jaune pour le prix
+═══════════════════════════════════════════════ */
+
+:root {
+  --pink:        #E8005A;
+  --pink-light:  #FF2272;
+  --pink-glow:   rgba(232, 0, 90, 0.3);
+  --gold:        #F5C518;
+  --gold-dark:   #C9A000;
+  --white:       #FFFFFF;
+  --bg:          #111111;
+  --bg-card:     #1A1A1A;
+  --bg-panel:    #141414;
+  --border:      #2A2A2A;
+  --text:        #F0F0F0;
+  --text-muted:  #888888;
+  --green:       #00C94C;
+}
+
+/* ── RESET ── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Open Sans', sans-serif;
+}
+
+/* ══════════════ HEADER ══════════════ */
+header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 70px;
+  background: var(--bg-card);
+  border-bottom: 3px solid var(--pink);
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px;
+  box-shadow: 0 2px 24px rgba(0,0,0,0.6);
+}
+
+.logo-wrap { display: flex; align-items: center; gap: 14px; }
+
+.logo-circle {
+  width: 50px; height: 50px; border-radius: 50%;
+  border: 2px solid var(--pink);
+  background: #000;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 16px var(--pink-glow);
+}
+
+.logo-text {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 30px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--white);
+}
+.logo-text span { color: var(--pink); }
+
+.header-center {
+  display: flex; align-items: center; gap: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 600;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.live-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 8px var(--green);
+  animation: blink 1.4s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+.header-right { display: flex; align-items: center; gap: 24px; }
+
+.clock {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 26px; font-weight: 500;
+  letter-spacing: 4px; color: var(--text-muted);
+}
+
+.veh-count {
+  background: var(--pink); color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 13px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 6px 16px;
+}
+
+/* ══════════════ PROGRESS BAR ══════════════ */
+.progress-track {
+  position: fixed; top: 70px; left: 0; right: 0; z-index: 200;
+  height: 3px; background: #222;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--pink), var(--pink-light));
+  width: 0%;
+  box-shadow: 0 0 10px var(--pink-glow);
+}
+
+/* ══════════════ STAGE ══════════════ */
+.stage {
+  position: fixed;
+  top: 73px; left: 0; right: 0; bottom: 88px;
+}
+
+/* ══════════════ SLIDE ══════════════ */
+.slide {
+  position: absolute; inset: 0;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.7s ease;
+  background: var(--bg);
+}
+.slide.active { opacity: 1; }
+
+/* ── Photo gauche ── */
+.slide-photo {
+  flex: 0 0 56%;
+  position: relative; overflow: hidden;
+  background: #0a0a0a;
+}
+
+.slide-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transform: scale(1.06);
+  transition: transform 9s ease;
+}
+.slide.active .slide-photo img { transform: scale(1); }
+
+/* Dégradé sombre sur les bords de la photo */
+.slash-overlay {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.35) 0%, transparent 30%),
+    linear-gradient(270deg, rgba(17,17,17,0.9) 0%, transparent 25%);
+  pointer-events: none;
+}
+
+/* Fondu vers panneau info */
+.slide-photo::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 0; width: 120px;
+  background: linear-gradient(90deg, transparent, var(--bg));
+  pointer-events: none;
+}
+
+/* Badge prix — cercle doré comme sur la fiche PDF */
+.photo-price {
+  position: absolute; bottom: 24px; left: 24px;
+  width: 120px; height: 120px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #FFD700, #C8860A);
+  box-shadow: 0 4px 24px rgba(200,134,10,0.5);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+}
+.photo-price-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase;
+  color: rgba(0,0,0,0.65);
+  margin-bottom: 1px;
+}
+.photo-price-amount {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 22px; font-weight: 900;
+  color: #1a0a00; line-height: 1;
+}
+.photo-price-ttc {
+  font-size: 9px; font-weight: 700;
+  color: rgba(0,0,0,0.55);
+  letter-spacing: 1px;
+}
+
+/* Badge km */
+.photo-km {
+  position: absolute; top: 20px; left: 20px;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(232,0,90,0.6);
+  padding: 7px 14px;
+  display: flex; align-items: center; gap: 8px;
+  color: var(--white);
+  font-size: 13px; font-weight: 600; letter-spacing: 1px;
+}
+
+/* Badge année */
+.photo-year {
+  position: absolute; top: 20px; right: 130px;
+  background: var(--pink); color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 20px; font-weight: 700; letter-spacing: 2px;
+  padding: 6px 16px;
+  box-shadow: 0 2px 12px var(--pink-glow);
+}
+
+/* ── Panneau info droite ── */
+.slide-info {
+  flex: 1;
+  background: var(--bg-panel);
+  padding: 24px 36px 20px 40px;
+  display: flex; flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+  border-left: 1px solid var(--border);
+}
+
+.car-brand {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 58px; font-weight: 700;
+  line-height: 0.9; letter-spacing: -1px;
+  text-transform: uppercase;
+  color: var(--white);
+}
+.car-model {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 28px; font-weight: 600;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--pink);
+}
+.car-version {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 400; letter-spacing: 0.5px;
+  margin-top: 6px; line-height: 1.5;
+}
+
+/* Séparateur */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, var(--pink) 0%, var(--border) 50%, transparent 100%);
+  margin: 12px 0;
+}
+
+/* Grille specs */
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+.spec {
+  background: var(--bg-card);
+  padding: 11px 14px;
+  border-bottom: 2px solid transparent;
+}
+.spec.hi { border-bottom-color: var(--pink); }
+
+.spec-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 4px;
+}
+.spec-val {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 18px; font-weight: 700;
+  color: var(--text); letter-spacing: 0.5px;
+}
+.spec-val.pink { color: var(--pink); }
+.spec-val.gold { color: var(--gold); }
+
+/* DPE */
+.dpe-badge {
+  display: inline-flex; align-items: center;
+  background: #222; color: var(--white);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 16px; font-weight: 700;
+  padding: 3px 10px 3px 3px; gap: 7px;
+  border: 1px solid var(--border);
+}
+.dpe-letter {
+  background: var(--pink);
+  width: 24px; height: 24px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; font-weight: 700;
+}
+
+/* Équipements */
+.features-block { flex: 1; overflow: hidden; margin-top: 2px; }
+.features-label {
+  font-size: 9px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 9px;
+}
+.features-wrap { display: flex; flex-wrap: wrap; gap: 6px; }
+.feat {
+  border: 1px solid var(--border);
+  padding: 4px 10px;
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  color: var(--text-muted);
+  background: var(--bg-card);
+}
+.feat.hi {
+  border-color: var(--pink);
+  color: var(--pink);
+  background: rgba(232,0,90,0.08);
+}
+
+/* Pied de slide */
+.slide-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.ref-tag {
+  font-size: 11px; color: #444;
+  letter-spacing: 2px; text-transform: uppercase;
+}
+.guarantee-tag {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 1px;
+  color: var(--green);
+  border: 1px solid rgba(0,201,76,0.4);
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+.dispo-tag {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.dispo-tag::before {
+  content: '';
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 6px var(--green);
+}
+
+/* ══════════════ BARRE MINIATURES ══════════════ */
+.thumb-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 200;
+  height: 88px;
+  background: #0a0a0a;
+  border-top: 2px solid var(--pink);
+  display: flex; align-items: center;
+  padding: 0 20px; gap: 10px;
+  overflow-x: auto; scrollbar-width: none;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.5);
+}
+.thumb-bar::-webkit-scrollbar { display: none; }
+
+.thumb {
+  flex: 0 0 110px; height: 64px;
+  position: relative; overflow: hidden; cursor: pointer;
+  border: 2px solid transparent;
+  transition: border-color 0.3s, opacity 0.3s;
+  opacity: 0.35;
+}
+.thumb.active {
+  border-color: var(--pink);
+  opacity: 1;
+  box-shadow: 0 0 10px var(--pink-glow);
+}
+.thumb img { width: 100%; height: 100%; object-fit: cover; }
+.thumb-name {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: rgba(0,0,0,0.82);
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.5px; text-transform: uppercase;
+  text-align: center; padding: 3px 4px;
+  color: var(--white);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+
+.slide-counter {
+  margin-left: auto; flex-shrink: 0;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 42px; font-weight: 700;
+  letter-spacing: -1px; color: #333;
+  white-space: nowrap;
+}
+.slide-counter em { color: var(--pink); font-style: normal; }
+
+/* ══════════════ ANIMATIONS ══════════════ */
+.slide.active .car-brand,
+.slide.active .car-model,
+.slide.active .car-version,
+.slide.active .divider,
+.slide.active .specs-grid,
+.slide.active .features-block,
+.slide.active .photo-price { animation: fadeUp 0.55s ease both; }
+
+.slide.active .car-model      { animation-delay: 0.08s; }
+.slide.active .car-version    { animation-delay: 0.13s; }
+.slide.active .divider        { animation-delay: 0.18s; }
+.slide.active .specs-grid     { animation-delay: 0.23s; }
+.slide.active .features-block { animation-delay: 0.32s; }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scanlines subtiles effet écran */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.03) 3px, rgba(0,0,0,0.03) 4px
+  );
+  pointer-events: none;
+}

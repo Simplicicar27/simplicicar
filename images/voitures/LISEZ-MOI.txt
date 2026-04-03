@@ -1,0 +1,7 @@
+Déposez vos photos de voitures ici.
+
+Format recommandé : JPG, 1200x800 px minimum
+Nommage suggéré : marque-modele.jpg
+Exemple : peugeot-3008.jpg
+
+Ces noms doivent correspondre aux chemins dans data/voitures.js

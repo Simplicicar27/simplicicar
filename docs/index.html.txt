@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simplicicar Évreux — Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;500;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0B0F17;
+    --bg-panel: #10151F;
+    --bg-card: #161C28;
+    --border: #232B3A;
+    --pink: #DB407A;
+    --pink-light: #E8709D;
+    --pink-glow: rgba(219,64,122,0.35);
+    --pink-bg: rgba(219,64,122,0.10);
+    --white: #F5F6F8;
+    --text-muted: #7B8496;
+    --green: #2E9E6C;
+    --green-bg: rgba(46,158,108,0.12);
+    --amber: #E0A336;
+    --amber-bg: rgba(224,163,54,0.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; width:100%; height:100%;
+    background: var(--bg); color: var(--white);
+    font-family:'Manrope',sans-serif;
+    overflow:hidden;
+  }
+  .display-font{ font-family:'Be Vietnam Pro',sans-serif; }
+
+  header{
+    position: fixed; top:0; left:0; right:0; z-index:200;
+    height: 74px;
+    background: var(--bg-panel);
+    border-bottom: 2px solid var(--pink);
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 0 40px;
+  }
+  .logo-wrap{ display:flex; align-items:center; gap:14px; }
+  .logo-mark{ width:14px; height:14px; border-radius:50%; background:var(--pink); box-shadow:0 0 10px var(--pink-glow); }
+  .logo-text{
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:800;
+    font-size: 24px; letter-spacing:-0.01em; color: var(--white);
+  }
+  .logo-sub{
+    font-family:'Manrope',sans-serif; font-weight:500; font-size:12px;
+    letter-spacing:0.1em; text-transform:uppercase; color: var(--text-muted);
+    margin-top:2px;
+  }
+  .header-center{
+    display:flex; align-items:center; gap:10px;
+    font-size:12px; font-weight:600; letter-spacing:0.12em; text-transform:uppercase;
+    color: var(--text-muted);
+  }
+  .live-dot{
+    width:8px; height:8px; border-radius:50%; background:var(--green);
+    box-shadow:0 0 8px var(--green); animation: blink 1.4s infinite;
+  }
+  @keyframes blink{ 0%,100%{opacity:1} 50%{opacity:.3} }
+  .header-right{ display:flex; align-items:center; gap:22px; }
+  .clock{ font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:24px; color: var(--white); }
+  .veh-count{
+    background: var(--pink); color: var(--white);
+    font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+    padding: 6px 16px; border-radius:4px;
+  }
+
+  .progress-track{ position:fixed; top:74px; left:0; right:0; z-index:200; height:3px; background:var(--border); }
+  .progress-fill{ height:100%; background: linear-gradient(90deg, var(--pink), var(--pink-light)); width:0%; }
+
+  .stage{ position:fixed; top:77px; left:0; right:0; bottom:96px; }
+
+  .slide{
+    position:absolute; inset:0; display:flex; opacity:0;
+    transition: opacity .6s ease; background: var(--bg);
+    pointer-events:none;
+  }
+  .slide.active{ opacity:1; pointer-events:auto; }
+
+  .slide-photo{ flex:0 0 54%; position:relative; overflow:hidden; background:#05070c; }
+  .slide-photo img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .slide-photo .noimg{
+    width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+    color: var(--text-muted); font-size:14px; font-weight:600; text-transform:uppercase; letter-spacing:.06em;
+  }
+  .photo-fade{
+    position:absolute; top:0; right:0; bottom:0; width:140px;
+    background: linear-gradient(90deg, transparent, var(--bg));
+    pointer-events:none;
+  }
+  .photo-km{
+    position:absolute; top:20px; left:20px;
+    background: rgba(11,15,23,0.8); border:1px solid rgba(219,64,122,0.5);
+    padding:7px 14px; color:var(--white); font-size:13px; font-weight:600; letter-spacing:.02em;
+  }
+  .photo-year{
+    position:absolute; top:20px; right:150px;
+    background: var(--pink); color:var(--white);
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:18px; letter-spacing:.03em;
+    padding:6px 16px;
+  }
+  .photo-price{
+    position:absolute; bottom:24px; left:24px;
+    min-width:120px; padding: 14px 20px; border-radius:12px;
+    background: var(--bg-panel); border:2px solid var(--pink);
+    text-align:center;
+  }
+  .photo-price-label{ font-size:9px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color: var(--text-muted); }
+  .photo-price-amount{ font-family:'Be Vietnam Pro',sans-serif; font-weight:800; font-size:24px; color: var(--white); line-height:1.2; }
+  .photo-status{
+    position:absolute; top:20px; left:20px; transform: translateY(38px);
+  }
+  .status-badge{
+    display:inline-block; font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:5px 12px; border-radius:999px; margin-top:8px;
+  }
+  .status-badge.v{ background:var(--green-bg); color:var(--green); border:1px solid rgba(46,158,108,.4); }
+  .status-badge.r{ background:var(--amber-bg); color:var(--amber); border:1px solid rgba(224,163,54,.4); }
+  .status-badge.d{ background:rgba(123,132,150,.12); color:var(--text-muted); border:1px solid var(--border); }
+
+  .slide-info{
+    flex:1; background: var(--bg-panel); border-left:1px solid var(--border);
+    padding: 30px 44px 22px 48px; display:flex; flex-direction:column; justify-content:space-between; overflow:hidden;
+  }
+  .car-brand{
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:800; font-size:52px; line-height:.95;
+    letter-spacing:-0.01em; color: var(--white);
+  }
+  .car-model{
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:26px;
+    color: var(--pink); margin-top:2px;
+  }
+  .car-version{ font-size:13px; color: var(--text-muted); margin-top:8px; line-height:1.5; max-width:90%; }
+
+  .divider{ height:1px; background: linear-gradient(90deg, var(--pink), var(--border) 60%, transparent); margin:16px 0; }
+
+  .specs-grid{ display:grid; grid-template-columns: repeat(3,1fr); gap:2px; }
+  .spec{ background: var(--bg-card); padding:12px 14px; border-bottom:2px solid transparent; }
+  .spec.hi{ border-bottom-color: var(--pink); }
+  .spec-label{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:4px; }
+  .spec-val{ font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:18px; color:var(--white); }
+  .spec-val.pink{ color: var(--pink); }
+
+  .tags-block{ margin-top:16px; }
+  .tags-label{ font-size:9px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--text-muted); margin-bottom:9px; }
+  .tags-wrap{ display:flex; flex-wrap:wrap; gap:7px; }
+  .tag{
+    border:1px solid var(--border); background: var(--bg-card);
+    padding:5px 12px; font-size:12px; font-weight:600; color: var(--text-muted);
+    border-radius: 4px;
+  }
+  .tag.hi{ border-color:var(--pink); color:var(--pink); background: var(--pink-bg); }
+
+  .slide-bottom{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:14px; border-top:1px solid var(--border); margin-top:14px;
+  }
+  .ref-tag{ font-size:11px; color:#4A5364; letter-spacing:.08em; text-transform:uppercase; }
+  .plate-tag{
+    font-family:'Manrope',sans-serif; font-weight:700; font-size:13px; color:var(--white);
+    background: var(--pink-bg); border:1px solid rgba(219,64,122,.3);
+    padding:4px 12px; border-radius:5px;
+  }
+
+  .thumb-bar{
+    position:fixed; bottom:0; left:0; right:0; z-index:200; height:96px;
+    background: var(--bg-panel); border-top:2px solid var(--pink);
+    display:flex; align-items:center; padding:0 24px; gap:10px;
+    overflow-x:auto; scrollbar-width:none;
+  }
+  .thumb-bar::-webkit-scrollbar{ display:none; }
+  .thumb{
+    flex:0 0 118px; height:70px; position:relative; overflow:hidden; cursor:pointer;
+    border:2px solid transparent; border-radius:6px; opacity:.4; transition: opacity .3s, border-color .3s;
+    background:#05070c;
+  }
+  .thumb.active{ border-color:var(--pink); opacity:1; }
+  .thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .thumb .noimg{ width:100%; height:100%; }
+  .thumb-name{
+    position:absolute; bottom:0; left:0; right:0; background:rgba(11,15,23,.85);
+    font-size:10px; font-weight:700; letter-spacing:.03em; text-transform:uppercase;
+    text-align:center; padding:3px 4px; color:var(--white);
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .slide-counter{
+    margin-left:auto; flex-shrink:0;
+    font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:34px; color:#2A3242;
+    white-space:nowrap; padding-left:16px;
+  }
+  .slide-counter em{ color:var(--pink); font-style:normal; }
+
+  .offline-banner{
+    position:fixed; bottom:106px; right:24px; z-index:300;
+    background:#2A1420; border:1px solid rgba(219,64,122,.5); color:var(--pink-light);
+    padding:8px 16px; border-radius:8px; font-size:13px; font-weight:600; display:none;
+  }
+  .offline-banner.show{ display:block; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-wrap">
+    <span class="logo-mark"></span>
+    <div>
+      <div class="logo-text">simplicicar</div>
+      <div class="logo-sub">Évreux · Catalogue</div>
+    </div>
+  </div>
+  <div class="header-center">
+    <span class="live-dot"></span>
+    Stock disponible en agence
+  </div>
+  <div class="header-right">
+    <div class="clock" id="clock">--:--</div>
+    <div class="veh-count" id="vehCount">— véhicules</div>
+  </div>
+</header>
+<div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
+
+<div class="stage" id="stage"></div>
+<div class="thumb-bar" id="thumbBar"></div>
+<div class="offline-banner" id="offlineBanner">Données non actualisées</div>
+
+<script>
+const DATA_URL = 'data.json';
+const DURATION_MS = 8000;
+const REFETCH_MS = 5 * 60 * 1000;
+const RELOAD_HOUR = 4;
+
+const FUEL_LABEL = { D: 'Gazole', E: 'Essence' };
+const TRANS_LABEL = { M: 'Manuelle', A: 'Automatique' };
+const STATUS_LABEL = { V: 'Disponible', R: 'Réservé', D: 'Mandat dépassé', L: 'Vendu' };
+const STATUS_CLASS = { V: 'v', R: 'r', D: 'd', L: 'v' };
+
+const stage = document.getElementById('stage');
+const thumbBar = document.getElementById('thumbBar');
+const pFill = document.getElementById('pFill');
+const clockEl = document.getElementById('clock');
+const vehCountEl = document.getElementById('vehCount');
+
+let vehicles = [];
+let current = 0;
+let timerId = null;
+let rafId = null;
+let t0 = null;
+let lastLoadedDay = new Date().getDate();
+
+function fmtPrice(p){ return p ? p.toLocaleString('fr-FR') + ' €' : 'Sur demande'; }
+function fmtKm(k){ return (k ?? 0).toLocaleString('fr-FR') + ' km'; }
+
+function buildSlide(v, index){
+  const slide = document.createElement('div');
+  slide.className = 'slide' + (index === 0 ? ' active' : '');
+
+  const tags = [];
+  if (v.advisor) tags.push({ text: v.advisor, hi: true });
+  if (v.plate) tags.push({ text: v.plate, hi: false });
+  if (v.daysLeft != null) tags.push({ text: v.daysLeft + ' jours restants', hi: false });
+
+  slide.innerHTML = `
+    <div class="slide-photo">
+      ${v.photo
+        ? `<img src="${v.photo}" alt="${v.brand_model}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'noimg\\'>Photo indisponible</div>'">`
+        : `<div class="noimg">Pas de photo</div>`}
+      <div class="photo-fade"></div>
+      <div class="photo-km">${fmtKm(v.km)}</div>
+      <div class="photo-status"><span class="status-badge ${STATUS_CLASS[v.status]||'d'}">${STATUS_LABEL[v.status]||v.status}</span></div>
+      ${v.year ? `<div class="photo-year">${v.year}</div>` : ''}
+      <div class="photo-price">
+        <div class="photo-price-label">Prix</div>
+        <div class="photo-price-amount">${fmtPrice(v.price)}</div>
+      </div>
+    </div>
+    <div class="slide-info">
+      <div>
+        <div class="car-brand">${v.brand_model}</div>
+        <div class="car-model">${v.variant || ''}</div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="specs-grid">
+        <div class="spec hi"><div class="spec-label">Carburant</div><div class="spec-val pink">${FUEL_LABEL[v.fuel]||v.fuel||'—'}</div></div>
+        <div class="spec"><div class="spec-label">Transmission</div><div class="spec-val">${TRANS_LABEL[v.trans]||v.trans||'—'}</div></div>
+        <div class="spec"><div class="spec-label">Puissance</div><div class="spec-val">${v.power ? v.power+' ch' : '—'}</div></div>
+        <div class="spec hi"><div class="spec-label">Kilométrage</div><div class="spec-val pink">${fmtKm(v.km)}</div></div>
+        <div class="spec"><div class="spec-label">Année</div><div class="spec-val">${v.year || '—'}</div></div>
+        <div class="spec"><div class="spec-label">Prix</div><div class="spec-val">${fmtPrice(v.price)}</div></div>
+      </div>
+
+      <div class="tags-block">
+        <div class="tags-label">Suivi commercial</div>
+        <div class="tags-wrap">
+          ${tags.map(t => `<span class="tag${t.hi?' hi':''}">${t.text}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="slide-bottom">
+        <div class="ref-tag">Réf. ${v.ref}</div>
+        ${v.plate ? `<div class="plate-tag">${v.plate}</div>` : ''}
+      </div>
+    </div>
+  `;
+  return slide;
+}
+
+function buildThumb(v, index){
+  const thumb = document.createElement('div');
+  thumb.className = 'thumb' + (index === 0 ? ' active' : '');
+  thumb.innerHTML = `
+    ${v.photo
+      ? `<img src="${v.photo}" alt="${v.brand_model}" onerror="this.parentElement.innerHTML='<div class=\\'noimg\\'></div>'">`
+      : `<div class="noimg"></div>`}
+    <div class="thumb-name">${v.brand_model}</div>
+  `;
+  thumb.addEventListener('click', () => goTo(index));
+  return thumb;
+}
+
+function buildCounter(){
+  const el = document.createElement('div');
+  el.className = 'slide-counter';
+  el.id = 'counter';
+  return el;
+}
+function updateCounter(index){
+  const el = document.getElementById('counter');
+  if (el) el.innerHTML = `<em>${String(index+1).padStart(2,'0')}</em> / ${String(vehicles.length).padStart(2,'0')}`;
+}
+
+function startProgress(){
+  if (rafId) cancelAnimationFrame(rafId);
+  t0 = performance.now();
+  function tick(now){
+    const elapsed = now - t0;
+    const pct = Math.min(100, (elapsed / DURATION_MS) * 100);
+    pFill.style.width = pct + '%';
+    if (pct < 100) rafId = requestAnimationFrame(tick);
+  }
+  rafId = requestAnimationFrame(tick);
+}
+
+function getSlides(){ return stage.querySelectorAll('.slide'); }
+function getThumbs(){ return thumbBar.querySelectorAll('.thumb'); }
+
+function goTo(index){
+  const slides = getSlides();
+  const thumbs = getThumbs();
+  if (!slides.length) return;
+
+  slides[current].classList.remove('active');
+  thumbs[current].classList.remove('active');
+
+  current = index;
+  slides[current].classList.add('active');
+  thumbs[current].classList.add('active');
+  thumbs[current].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+  updateCounter(current);
+  startProgress();
+
+  clearTimeout(timerId);
+  timerId = setTimeout(nextSlide, DURATION_MS);
+}
+
+function nextSlide(){
+  goTo((current + 1) % vehicles.length);
+}
+
+function renderClock(){
+  const now = new Date();
+  clockEl.textContent = now.toLocaleTimeString('fr-FR', { hour:'2-digit', minute:'2-digit' });
+  if (now.getHours() === RELOAD_HOUR && now.getDate() !== lastLoadedDay){
+    location.reload();
+  }
+}
+
+function renderScene(){
+  stage.innerHTML = '';
+  thumbBar.innerHTML = '';
+  current = 0;
+
+  vehicles.forEach((v, i) => {
+    stage.appendChild(buildSlide(v, i));
+    thumbBar.appendChild(buildThumb(v, i));
+  });
+  thumbBar.appendChild(buildCounter());
+  updateCounter(0);
+
+  vehCountEl.textContent = vehicles.length + ' véhicule' + (vehicles.length > 1 ? 's' : '');
+
+  clearTimeout(timerId);
+  if (vehicles.length){
+    startProgress();
+    timerId = setTimeout(nextSlide, DURATION_MS);
+  }
+}
+
+async function loadData(){
+  try {
+    const res = await fetch(DATA_URL + '?t=' + Date.now(), { cache:'no-store' });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const payload = await res.json();
+    const order = { V:0, R:1, L:2, D:3 };
+    vehicles = (payload.vehicles || []).sort((a,b) => (order[a.status]??9) - (order[b.status]??9));
+    document.getElementById('offlineBanner').classList.remove('show');
+    renderScene();
+  } catch (err){
+    console.error('Erreur de chargement du catalogue :', err);
+    document.getElementById('offlineBanner').classList.add('show');
+  }
+}
+
+renderClock();
+setInterval(renderClock, 30000);
+loadData();
+setInterval(loadData, REFETCH_MS);
+</script>
+</body>
+</html>

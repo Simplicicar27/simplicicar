@@ -222,6 +222,7 @@
     <div class="veh-count" id="vehCount">— véhicules</div>
   </div>
 </header>
+
 <div class="progress-track"><div class="progress-fill" id="pFill"></div></div>
 
 <div class="stage" id="stage"></div>
@@ -254,6 +255,7 @@ let lastLoadedDay = new Date().getDate();
 
 function fmtPrice(p){ return p ? p.toLocaleString('fr-FR') + ' €' : 'Sur demande'; }
 function fmtKm(k){ return (k ?? 0).toLocaleString('fr-FR') + ' km'; }
+function bigPhoto(url){ return url ? url.replace('/photos/300/', '/photos/original/') : url; }
 
 function buildSlide(v, index){
   const slide = document.createElement('div');
@@ -267,7 +269,7 @@ function buildSlide(v, index){
   slide.innerHTML = `
     <div class="slide-photo">
       ${v.photo
-        ? `<img src="${v.photo}" alt="${v.brand_model}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'noimg\\'>Photo indisponible</div>'">`
+        ? `<img src="${bigPhoto(v.photo)}" alt="${v.brand_model}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'noimg\\'>Photo indisponible</div>'">`
         : `<div class="noimg">Pas de photo</div>`}
       <div class="photo-fade"></div>
       <div class="photo-km">${fmtKm(v.km)}</div>
@@ -362,6 +364,7 @@ function goTo(index){
   slides[current].classList.add('active');
   thumbs[current].classList.add('active');
   thumbs[current].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' });
+
   updateCounter(current);
   startProgress();
 

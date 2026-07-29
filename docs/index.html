@@ -269,7 +269,7 @@ function buildSlide(v, index){
   slide.innerHTML = `
     <div class="slide-photo">
       ${v.photo
-        ? `<img src="${bigPhoto(v.photo)}" alt="${v.brand_model}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'noimg\\'>Photo indisponible</div>'">`
+        ? `<img src="${bigPhoto(v.photo)}" alt="${v.brand_model}" onerror="this.parentElement.innerHTML='<div class=\\'noimg\\'>Photo indisponible</div>'">`
         : `<div class="noimg">Pas de photo</div>`}
       <div class="photo-fade"></div>
       <div class="photo-km">${fmtKm(v.km)}</div>

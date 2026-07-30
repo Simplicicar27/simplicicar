@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-07-29T12:23:07.779485+00:00",
+  "generated_at": "2026-07-30T03:50:19.546699+00:00",
   "agency": "Simplicicar Evreux",
-  "count": 85,
+  "count": 84,
   "vehicles": [
     {
       "ref": "16708",
@@ -14,7 +14,7 @@
       "trans": "M",
       "power": 150,
       "plate": "EX-651-BB",
-      "daysLeft": 34,
+      "daysLeft": 33,
       "price": 18980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16708/photos/300/wauzzz8vxja101394-00-front-right.jpg"
@@ -30,7 +30,7 @@
       "trans": "M",
       "power": 116,
       "plate": "GV-847-JW",
-      "daysLeft": 33,
+      "daysLeft": 32,
       "price": null,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16600/photos/300/sk428282919132937-00-front-right.jpg"
@@ -62,7 +62,7 @@
       "trans": "M",
       "power": 116,
       "plate": "FB-332-VS",
-      "daysLeft": 31,
+      "daysLeft": 30,
       "price": 17980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16500/photos/300/aud29494949393939-00-front-right.jpg"
@@ -78,7 +78,7 @@
       "trans": "M",
       "power": 110,
       "plate": "AS-093-SE",
-      "daysLeft": 31,
+      "daysLeft": 30,
       "price": 4980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16489/photos/300/vvl81872828919190-00-front-right.jpg"
@@ -94,7 +94,7 @@
       "trans": "A",
       "power": 156,
       "plate": "FZ-097-ZL",
-      "daysLeft": 29,
+      "daysLeft": 28,
       "price": 26980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16366/photos/300/clasb382828192929-00-front-right.jpg"
@@ -110,7 +110,7 @@
       "trans": "M",
       "power": 100,
       "plate": "GH-269-RM",
-      "daysLeft": 28,
+      "daysLeft": 27,
       "price": 10980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16182/photos/300/peu20871636378282-00-front-right.jpg"
@@ -126,26 +126,10 @@
       "trans": "A",
       "power": 184,
       "plate": "FR-772-YV",
-      "daysLeft": 28,
+      "daysLeft": 27,
       "price": 14980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16154/photos/300/aud3skkzkzkzsnnnn-00-front-right.jpg"
-    },
-    {
-      "ref": "16126",
-      "brand_model": "FIAT 500 C",
-      "variant": "C 0.9 8V 85 POP TWIN AIR STOP AND START",
-      "advisor": "Yann MAIGNAN",
-      "year": 2011,
-      "km": 107890,
-      "fuel": "E",
-      "trans": "M",
-      "power": 85,
-      "plate": "FS-409-BP",
-      "daysLeft": null,
-      "price": 5480,
-      "status": "R",
-      "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16126/photos/300/fat50000000jhhhhh-00-front-right.jpg"
     },
     {
       "ref": "15931",
@@ -158,7 +142,7 @@
       "trans": "M",
       "power": 110,
       "plate": "HJ-918-WS",
-      "daysLeft": 30,
+      "daysLeft": 29,
       "price": 8980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/15931/photos/300/dust5556785778876-00-front-right.jpg"
@@ -190,7 +174,7 @@
       "trans": "M",
       "power": 143,
       "plate": "FX-365-WE",
-      "daysLeft": 23,
+      "daysLeft": 22,
       "price": 6980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/15772/photos/300/wmwsw71080t330382-00-front-right.jpg"
@@ -206,7 +190,7 @@
       "trans": "A",
       "power": 145,
       "plate": "HD-486-YH",
-      "daysLeft": 16,
+      "daysLeft": 15,
       "price": 19980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/15167/photos/300/vf1rja00274192999-00-front-right.jpg"
@@ -222,7 +206,7 @@
       "trans": "M",
       "power": 130,
       "plate": "EW-490-HH",
-      "daysLeft": 14,
+      "daysLeft": 13,
       "price": 11480,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14987/photos/300/vesmrhnyhjs173408-00-front-right.jpg"
@@ -238,7 +222,7 @@
       "trans": "A",
       "power": 150,
       "plate": "GT-530-EZ",
-      "daysLeft": 14,
+      "daysLeft": 13,
       "price": 29980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14965/photos/300/vwtuguan872728282-00-front-right.jpg"
@@ -254,7 +238,7 @@
       "trans": "M",
       "power": 160,
       "plate": "BP-601-JY",
-      "daysLeft": 12,
+      "daysLeft": 11,
       "price": 14980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14719/photos/300/truzzz8jxb1025957-00-front-right.jpg"
@@ -286,7 +270,7 @@
       "trans": "A",
       "power": 118,
       "plate": "GJ-874-YL",
-      "daysLeft": 9,
+      "daysLeft": 8,
       "price": 9480,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14452/photos/300/yfvtbeu0ds7t20019-00-front-right.jpg"
@@ -302,7 +286,7 @@
       "trans": "A",
       "power": 130,
       "plate": "GA-785-NN",
-      "daysLeft": 8,
+      "daysLeft": 7,
       "price": 16980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14436/photos/300/9292tsanl2ha33ean-00-front-right.jpg"
@@ -318,7 +302,7 @@
       "trans": "M",
       "power": 126,
       "plate": "CW-855-PJ",
-      "daysLeft": 5,
+      "daysLeft": 4,
       "price": 36980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14104/photos/300/land9837382899191-00-front-right.jpg"
@@ -334,7 +318,7 @@
       "trans": "M",
       "power": 120,
       "plate": "EJ-626-CP",
-      "daysLeft": 2,
+      "daysLeft": 1,
       "price": 9980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/13915/photos/300/vf3cubhzmgy186460-00-front-right.jpg"
@@ -1174,7 +1158,7 @@
     {
       "ref": "2820",
       "brand_model": "SEAT LEON",
-      "variant": "1.0 TSI 110 REFERENCE",
+      "variant": "1.0 TSI 110 URBAN",
       "advisor": "Elias DRIYEJ",
       "year": 2021,
       "km": 57510,
@@ -1183,7 +1167,7 @@
       "power": 110,
       "plate": "FX-318-EE",
       "daysLeft": null,
-      "price": 15980,
+      "price": 15480,
       "status": "D",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/2820/photos/300/vss18483892959329-00-front-right.jpg"
     },

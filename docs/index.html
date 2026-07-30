@@ -99,13 +99,13 @@
     padding:7px 14px; color:var(--white); font-size:13px; font-weight:600; letter-spacing:.02em;
   }
   .photo-year{
-    position:absolute; top:20px; right:150px;
+    position:absolute; top:20px; right:20px;
     background: var(--pink); color:var(--white);
     font-family:'Be Vietnam Pro',sans-serif; font-weight:700; font-size:18px; letter-spacing:.03em;
     padding:6px 16px;
   }
   .photo-price{
-    position:absolute; bottom:24px; left:24px;
+    position:absolute; top:64px; right:20px;
     min-width:120px; padding: 14px 20px; border-radius:12px;
     background: var(--bg-panel); border:2px solid var(--pink);
     text-align:center;
@@ -261,11 +261,6 @@ function buildSlide(v, index){
   const slide = document.createElement('div');
   slide.className = 'slide' + (index === 0 ? ' active' : '');
 
-  const tags = [];
-  if (v.advisor) tags.push({ text: v.advisor, hi: true });
-  if (v.plate) tags.push({ text: v.plate, hi: false });
-  if (v.daysLeft != null) tags.push({ text: v.daysLeft + ' jours restants', hi: false });
-
   slide.innerHTML = `
     <div class="slide-photo">
       ${v.photo
@@ -297,16 +292,8 @@ function buildSlide(v, index){
         <div class="spec"><div class="spec-label">Prix</div><div class="spec-val">${fmtPrice(v.price)}</div></div>
       </div>
 
-      <div class="tags-block">
-        <div class="tags-label">Suivi commercial</div>
-        <div class="tags-wrap">
-          ${tags.map(t => `<span class="tag${t.hi?' hi':''}">${t.text}</span>`).join('')}
-        </div>
-      </div>
-
       <div class="slide-bottom">
         <div class="ref-tag">Réf. ${v.ref}</div>
-        ${v.plate ? `<div class="plate-tag">${v.plate}</div>` : ''}
       </div>
     </div>
   `;

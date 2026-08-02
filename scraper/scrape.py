@@ -33,6 +33,7 @@ STATUS_LABEL = {
     "Mandat dépassé": "D",
     "Vendu / Livré": "L",
 }
+
 # Script exécuté dans la page pour extraire les données de chaque carte véhicule.
 # Reproduit fidèlement la structure DOM observée sur /vehicles (Nuxt + Tailwind).
 EXTRACTION_JS = """
@@ -61,15 +62,26 @@ EXTRACTION_JS = """
 
     const metaParts = metaLine.split(' · ');
     const advisor = metaParts[0] || null;
-    const yearKm = metaParts[1] || '';
-    const [year, kmRaw] = yearKm.split(',').map(s => s.trim());
-    const km = kmRaw ? kmRaw.replace(' km', '') : null;
-    const fuelTransPower = metaParts[2] || '';
-    const ftpParts = fuelTransPower.split(',').map(s => s.trim());
-    const fuel = ftpParts[0] || null;
-    const transmission = ftpParts[1] || null;
-    const power = ftpParts[2] ? ftpParts[2].replace(' ch', '') : null;
-    const plate = metaParts[3] || null;
+
+    // Extraction par regex indépendants (robuste aux variations de mise en forme
+    // selon le type de véhicule : segment manquant, ordre différent, etc.)
+    const yearMatch = metaLine.match(/\\b(19|20)\\d{2}\\b/);
+    const year = yearMatch ? yearMatch[0] : null;
+
+    const kmMatch = metaLine.match(/([\\d\\s]{2,})\\s*km\\b/);
+    const km = kmMatch ? kmMatch[1].replace(/\\s+/g, '') : null;
+
+    const fuelMatch = metaLine.match(/\\b(Gazole|Essence|Hybride|Electrique|Électrique)\\b/i);
+    const fuel = fuelMatch ? fuelMatch[1] : null;
+
+    const transMatch = metaLine.match(/\\b(Automatique|Mecanique|Mécanique)\\b/i);
+    const transmission = transMatch ? transMatch[1] : null;
+
+    const powerMatch = metaLine.match(/(\\d+)\\s*ch\\b/);
+    const power = powerMatch ? powerMatch[1] : null;
+
+    const plateMatch = metaLine.match(/\\b([A-Z]{2}-\\d{3}-[A-Z]{2})\\b/);
+    const plate = plateMatch ? plateMatch[1] : null;
 
     const refMatch = refLine.match(/Réf\\.\\s*(\\d+)/);
     const ref = refMatch ? refMatch[1] : null;
@@ -92,25 +104,33 @@ EXTRACTION_JS = """
 """
 
 
+def safe_int(value):
+    """Convertit en entier sans jamais lever d'exception (retourne None si échec)."""
+    if not value:
+        return None
+    try:
+        digits = "".join(ch for ch in str(value) if ch.isdigit())
+        return int(digits) if digits else None
+    except (TypeError, ValueError):
+        return None
+
+
 def normalize(raw):
     fuel = FUEL_LABEL.get(raw["fuel"], raw["fuel"])
     trans = TRANS_LABEL.get(raw["transmission"], raw["transmission"])
     status = STATUS_LABEL.get(raw["status"], "D")
-    price = None
-    if raw["price"]:
-        digits = "".join(ch for ch in raw["price"] if ch.isdigit())
-        price = int(digits) if digits else None
+    price = safe_int(raw["price"])
 
     return {
         "ref": raw["ref"],
         "brand_model": raw["brand_model"],
         "variant": raw["variant"],
         "advisor": raw["advisor"],
-        "year": int(raw["year"]) if raw["year"] else None,
-        "km": int(raw["km"]) if raw["km"] else None,
+        "year": safe_int(raw["year"]),
+        "km": safe_int(raw["km"]),
         "fuel": fuel,
         "trans": trans,
-        "power": int(raw["power"]) if raw["power"] else None,
+        "power": safe_int(raw["power"]),
         "plate": raw["plate"],
         "daysLeft": raw["daysLeft"],
         "price": price,
@@ -158,7 +178,14 @@ def run():
         print("ERREUR: 0 véhicule extrait. La structure de la page a peut-être changé.", file=sys.stderr)
         sys.exit(1)
 
-    vehicles = [normalize(v) for v in raw_vehicles if v.get("ref")]
+    vehicles = []
+    for raw in raw_vehicles:
+        if not raw.get("ref"):
+            continue
+        try:
+            vehicles.append(normalize(raw))
+        except Exception as exc:  # ne jamais laisser un véhicule casser tout le scan
+            print(f"AVERTISSEMENT: véhicule réf. {raw.get('ref')} ignoré ({exc}).", file=sys.stderr)
 
     payload = {
         "generated_at": datetime.now(timezone.utc).isoformat(),

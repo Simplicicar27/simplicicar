@@ -104,15 +104,20 @@ EXTRACTION_JS = """
 """
 
 
-def safe_int(value):
-    """Convertit en entier sans jamais lever d'exception (retourne None si échec)."""
+def safe_int(value, max_value=None):
+    """Convertit en entier sans jamais lever d'exception (retourne None si échec
+    ou si la valeur dépasse un plafond de plausibilité — utile quand la fiche
+    source est incomplète et que des champs se retrouvent collés sans séparateur)."""
     if not value:
         return None
     try:
         digits = "".join(ch for ch in str(value) if ch.isdigit())
-        return int(digits) if digits else None
+        result = int(digits) if digits else None
     except (TypeError, ValueError):
         return None
+    if result is not None and max_value is not None and result > max_value:
+        return None
+    return result
 
 
 def normalize(raw):
@@ -126,11 +131,11 @@ def normalize(raw):
         "brand_model": raw["brand_model"],
         "variant": raw["variant"],
         "advisor": raw["advisor"],
-        "year": safe_int(raw["year"]),
-        "km": safe_int(raw["km"]),
+        "year": safe_int(raw["year"], max_value=2100),
+        "km": safe_int(raw["km"], max_value=1_000_000),
         "fuel": fuel,
         "trans": trans,
-        "power": safe_int(raw["power"]),
+        "power": safe_int(raw["power"], max_value=2000),
         "plate": raw["plate"],
         "daysLeft": raw["daysLeft"],
         "price": price,

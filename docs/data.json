@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-04T03:57:15.693398+00:00",
+  "generated_at": "2026-08-05T03:52:43.018317+00:00",
   "agency": "Simplicicar Evreux",
   "count": 87,
   "vehicles": [
@@ -14,10 +14,10 @@
       "trans": "M",
       "power": 130,
       "plate": "EC-547-ZF",
-      "daysLeft": 34,
-      "price": null,
+      "daysLeft": 33,
+      "price": 9980,
       "status": "V",
-      "photo": null
+      "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/17168/photos/300/vf1rfb00953389366-00-front-right.jpg"
     },
     {
       "ref": "17136",
@@ -30,10 +30,10 @@
       "trans": "A",
       "power": 190,
       "plate": "HB-009-WH",
-      "daysLeft": 34,
-      "price": null,
+      "daysLeft": 33,
+      "price": 16980,
       "status": "V",
-      "photo": null
+      "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/17136/photos/300/wbah1ust00se31452-00-front-right.jpg"
     },
     {
       "ref": "17056",
@@ -46,7 +46,7 @@
       "trans": "A",
       "power": 150,
       "plate": "FT-778-HC",
-      "daysLeft": 32,
+      "daysLeft": 31,
       "price": 28980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/17056/photos/300/wauzzzf3xm1019350-00-front-right.jpg"
@@ -62,7 +62,7 @@
       "trans": "A",
       "power": 230,
       "plate": "GL-562-TV",
-      "daysLeft": 32,
+      "daysLeft": 31,
       "price": 32980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16990/photos/300/tmaje811bnj135713-00-front-right.jpg"
@@ -94,7 +94,7 @@
       "trans": "A",
       "power": 150,
       "plate": "DX-378-CE",
-      "daysLeft": 30,
+      "daysLeft": 29,
       "price": 16480,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16894/photos/300/vf174829593995593-00-front-right.jpg"
@@ -126,7 +126,7 @@
       "trans": "M",
       "power": 116,
       "plate": "GV-847-JW",
-      "daysLeft": 27,
+      "daysLeft": 26,
       "price": 22980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16600/photos/300/sk428282919132937-00-front-right.jpg"
@@ -142,7 +142,7 @@
       "trans": "M",
       "power": 116,
       "plate": "FB-332-VS",
-      "daysLeft": 25,
+      "daysLeft": 24,
       "price": 17980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16500/photos/300/aud29494949393939-00-front-right.jpg"
@@ -158,7 +158,7 @@
       "trans": "M",
       "power": 110,
       "plate": "AS-093-SE",
-      "daysLeft": 25,
+      "daysLeft": 24,
       "price": 4980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16489/photos/300/vvl81872828919190-00-front-right.jpg"
@@ -174,7 +174,7 @@
       "trans": "A",
       "power": 156,
       "plate": "FZ-097-ZL",
-      "daysLeft": 23,
+      "daysLeft": 22,
       "price": 26980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16366/photos/300/clasb382828192929-00-front-right.jpg"
@@ -190,7 +190,7 @@
       "trans": "M",
       "power": 100,
       "plate": "GH-269-RM",
-      "daysLeft": 22,
+      "daysLeft": 21,
       "price": 10980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16182/photos/300/peu20871636378282-00-front-right.jpg"
@@ -206,7 +206,7 @@
       "trans": "A",
       "power": 184,
       "plate": "FR-772-YV",
-      "daysLeft": 22,
+      "daysLeft": 21,
       "price": 14980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/16154/photos/300/aud3skkzkzkzsnnnn-00-front-right.jpg"
@@ -222,7 +222,7 @@
       "trans": "M",
       "power": 110,
       "plate": "HJ-918-WS",
-      "daysLeft": 24,
+      "daysLeft": 23,
       "price": 8980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/15931/photos/300/dust5556785778876-00-front-right.jpg"
@@ -238,7 +238,7 @@
       "trans": "M",
       "power": 143,
       "plate": "FX-365-WE",
-      "daysLeft": 17,
+      "daysLeft": 16,
       "price": 6980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/15772/photos/300/wmwsw71080t330382-00-front-right.jpg"
@@ -270,7 +270,7 @@
       "trans": "M",
       "power": 130,
       "plate": "EW-490-HH",
-      "daysLeft": 8,
+      "daysLeft": 7,
       "price": 11480,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14987/photos/300/vesmrhnyhjs173408-00-front-right.jpg"
@@ -286,7 +286,7 @@
       "trans": "A",
       "power": 150,
       "plate": "GT-530-EZ",
-      "daysLeft": 8,
+      "daysLeft": 7,
       "price": 29980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14965/photos/300/vwtuguan872728282-00-front-right.jpg"
@@ -334,7 +334,7 @@
       "trans": "A",
       "power": 118,
       "plate": "GJ-874-YL",
-      "daysLeft": 3,
+      "daysLeft": 2,
       "price": 9480,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14452/photos/300/yfvtbeu0ds7t20019-00-front-right.jpg"
@@ -350,7 +350,7 @@
       "trans": "A",
       "power": 130,
       "plate": "GA-785-NN",
-      "daysLeft": 2,
+      "daysLeft": 1,
       "price": 16980,
       "status": "V",
       "photo": "https://api.sayspilot360.fr/storage/agencies/23/vehicles/14436/photos/300/9292tsanl2ha33ean-00-front-right.jpg"
